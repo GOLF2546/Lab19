@@ -36,19 +36,25 @@ void importDataFromFile(string filename,vector <string> &names,vector <int> &sco
 }
 
 void getCommand(string &command , string &key){
-    cout << "Please input your command : ";
-    cin >> command;
-    cin >> key;
+    cout << "Please input your command: ";
+    string text;
+    char format[] = "%s %[^\n]";
+    char a[100];
+    char b[100];
+    getline(cin,text);
+    sscanf(text.c_str(),format,a,b);
+    command = a;
+    key = b;
 }
 
 void searchName(vector <string> &names,vector <int> &scores,vector <char> &grades,string key){
     int count = 0;
     cout << "---------------------------------" << endl;
-    for(int i =0; i<names.size();i++){
+    for(unsigned int i =0; i<names.size();i++){
         string name = names[i];
         if(key == toUpperStr(name)){
-            cout << key << "'s" << " " << "score = " << scores[i] << endl;
-            cout << key << "'s" << " " << "grade = " << grades[i] << endl;
+            cout << names[i] << "'s" << " " << "score = " << scores[i] << endl;
+            cout << names[i] << "'s" << " " << "grade = " << grades[i] << endl;
             count++;
         }
     }
@@ -61,7 +67,7 @@ void searchName(vector <string> &names,vector <int> &scores,vector <char> &grade
 void searchGrade(vector <string> &names,vector <int> &scores,vector <char> &grades,string key){
     int count = 0;
     cout << "---------------------------------" << endl;
-    for(int i =0; i<names.size();i++){
+    for(unsigned int i =0; i<names.size();i++){
         if(key[0] == grades[i]){
             cout << names[i] << " " << "(" << scores[i] << ")" << endl;
             count++;
